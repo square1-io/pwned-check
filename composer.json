@@ -1,0 +1,44 @@
+{
+    "name": "square1/pwned-check",
+    "type": "library",
+    "description": "Validate password changes against known-compromised passwords",
+    "keywords": [
+        "square1",
+        "pwned-check",
+        "password",
+        "security"
+    ],
+    "homepage": "https://github.com/square1-io/pwned-check",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul Conroy",
+            "email": "paul@square1.io",
+            "homepage": "https://www.square1.io"
+        }
+    ],
+    "require": {
+        "php" : "~7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Square1\\Pwned\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Square1\\Pwned\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
