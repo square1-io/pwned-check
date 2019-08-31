@@ -143,7 +143,13 @@ class Pwned
         // start of the hashed password
         list($range, $selector) = $this->split($value);
 
-        return array_get($this->getApiResultsForRange($range), $selector, 0);
+        $result = $this->getApiResultsForRange($range);
+
+        if (!array_key_exists($selector, $result)) {
+            return 0;
+        }
+
+        return $result[$selector];
     }
 
 
@@ -163,11 +169,13 @@ class Pwned
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_USERAGENT, $this->config['user_agent']);
 
-        if (array_get($this->config, 'connection_timeout', 0) > 0) {
+        if (array_key_exists('connection_timeout', $this->config)
+            && $this->config['connection_timeout'] > 0) {
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->config['connection_timeout']);
         }
 
-        if (array_get($this->config, 'remote_processing_timeout', 0) > 0) {
+        if (array_key_exists('remote_processing_timeout', $this->config)
+            && $this->config['remote_processing_timeout'] > 0) {
             curl_setopt($ch, CURLOPT_TIMEOUT, $this->config['remote_processing_timeout']);
         }
 
