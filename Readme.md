@@ -13,16 +13,22 @@ $ composer require square1/pwned-check
 ## Usage
 
 ``` php
-    $pwned = new \Square1\Pwned();
+    use Square1\Pwned\Pwned;
+    use Square1\Pwned\Exception\ConnectionFailedException;
+
+    $password = 'password1';
+
+    $pwned = new Pwned();
     // Has password ever been compromised?
     $compromised = $pwned->hasBeenPwned($password);
+    // (bool) true
 
     // Has password appeared in more than 5 compromised datasets?
     $compromised = $pwned->hasBeenPwned($password, 5);
 
     // Don't allow remote server to hang for over 2 seconds
     try {
-        $pwned = new \Square1\Pwned(['remote_processing_timeout' => 2]);
+        $pwned = new Pwned(['remote_processing_timeout' => 2]);
         $compromised = $pwned->hasBeenPwned($password);
     } catch (ConnectionFailedException $e) {
        // Connection has timed out..
